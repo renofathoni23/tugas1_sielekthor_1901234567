@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Form Add Member </title>
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Form Tambah Member</h2>
+                <br>
+                <form th:action="@{/member/ubah}" th:object="${member}" method="POST">
+                    <input type="hidden" th:field="*{idMember}" />
+                    Nama : <br>
+                    <input required class="form-control" type="text" name="nama_member" th:value="*{nama_member}"/>
+                    <br><br>
+
+                    Tanggal Lahir : <br>
+                    <input required class="form-control" type="date" name="tanggal_lahir" th:value="*{tanggal_pendaftaran}"/>
+                    <br><br>
+
+                    Tanggal Pendaftaran : <br>
+                    <input required class="form-control" type="date" name="tanggal_pendaftaran" th:value="*{tanggal_lahir}"/>
+                    <br><br>
+
+                    Jenis Kelamin : <br>
+                    <label>
+                        <input required class="form-control" type="radio" name="jenisKelamin" th:value="@{0}"/> Laki-Laki
+                    </label>
+
+                    <br>
+
+                    <label>
+                        <input required class="form-control" type="radio" name="jenisKelamin" th:value="@{1}"/> Perempuan
+                    </label>
+                    <br><br>
+
+                    <button class="btn btn-warning btn-outline-dark" type="submit">Submit</button>
+                    <a class="btn btn-warning btn-dark" href="/">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

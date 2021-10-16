@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Barang</title>
+    <meta charset="UTF-8">
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+        <br>
+        <h2 class="text-center">Daftar Pembelian</h2>
+        <br>
+        <a href="/" class="btn btn-warning font-weight-bold">+ Tambah Pembelian</a>
+        <br>
+        <br>
+        <table class="table">
+        <thead class="bg-warning">
+        <tr>
+            <th>No</th>
+            <th>No Invoice</th>
+            <th>Total Harga</th>
+            <th>Member</th>
+            <th>Jumlah Barang</th>
+            <th>Tanggal Pembelian</th>
+            <th class="text-center">Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pembelian, iterationStatus : ${listPembelian}" >
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${pembelian.no_invoice}"></td>
+            <td th:text="${pembelian.total}"></td>
+            <td th:text="${pembelian.member.nama_member}"></td>
+            <td th:text="${listTotal[iterationStatus.index]}"></td>
+            <td th:text="${#dates.format(pembelian.tanggal_pembelian, 'dd MMMM yyyy')}"></td>
+            <td class>
+                <a class="btn btn-primary" th:href="@{/pembelian/} + ${pembelian.idPembelian}">Lihat</a>
+                <a class="btn btn-danger" th:href="@{/pembelian/hapus/} + ${pembelian.idPembelian}">Hapus</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> View Cabang </title>
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <h2 class="badge bg-warning text-dark text-center" style="font-size: 50px">Detail Barang</h2>
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="row">
+                    <div class="col-4">
+                        Nama Barang
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.nama_barang}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Kode Barang
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.kode_barang}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Merk Barang
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.merk_barang}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Stok Barang
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.stok}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Garansi Toko
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.jumlah_garansi}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Deskripsi
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.deskripsi_barang}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Tipe Barang
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.tipe.nama}"></p>
+                    </div>
+                    <div class="col-4">
+                        Harga
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${barang.harga_barang}"></p>
+                    </div>
+
+                </div>
+<!--                <br>-->
+<!--                <p th:text="'Nama Barang : ' + ${barang.nama_barang}"></p>-->
+<!--                <p th:text="'Kode Barang : ' + ${barang.kode_barang}"></p>-->
+<!--                <p th:text="'Merk Barang : ' + ${barang.merk_barang}"></p>-->
+<!--                <p th:text="'Stok Barang : ' + ${barang.stok}"></p>-->
+<!--                <p th:text="'Garansi Toko: ' + ${barang.jumlah_garansi}"></p>-->
+<!--                <p th:text="'Deskripsi : ' + ${barang.deskripsi_barang}"></p>-->
+<!--                <p th:text="'Tipe Barang : ' + ${barang.tipe.nama}"></p>-->
+<!--                <p th:text="'Harga :' + 'Rp' +${barang.harga_barang}"></p>-->
+<!--                <br>-->
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-light btn-outline-warning" href="/barang">Kembali</a>
+</div>
+</body>
+
+</html>

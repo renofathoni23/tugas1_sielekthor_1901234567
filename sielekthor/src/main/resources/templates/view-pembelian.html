@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> View Cabang </title>
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <h2 class="badge bg-warning text-dark text-center" style="font-size: 50px">Detail Pembelian</h2>
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="row">
+                    <div class="col-4">
+                        No Invoice
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${pembelian.no_invoice}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Total Harga
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${pembelian.total}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Member
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${pembelian.member.nama_member}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Jumlah Barang
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${jumlahBarang}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Tanggal Pembelian
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${#dates.format(pembelian.tanggal_pembelian, 'dd MMMM yyyy')}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Nama Admin
+                    </div>
+                    <div class="col-8">
+                        <p th:text="': ' + ${pembelian.nama_admin}"></p>
+                    </div>
+
+                    <div class="col-4">
+                        Metode Pembayaran
+                    </div>
+                    <div class="col-8">
+                        <p th:if="${pembelian.is_cash} == True">: Tunai</p>
+                        <p th:if="${pembelian.is_cash} == False">: Cicil</p>
+                    </div>
+
+                    <div class="col-10">
+                    </div>
+                    <div class="col-2">
+                        <a class="btn btn-danger" th:href="@{/pembelian/hapus/} + ${pembelian.idPembelian}">Hapus</a>
+                    </div>
+
+                </div>
+                <!--                <br>-->
+                <!--                <p th:text="'Nama Barang : ' + ${barang.nama_barang}"></p>-->
+                <!--                <p th:text="'Kode Barang : ' + ${barang.kode_barang}"></p>-->
+                <!--                <p th:text="'Merk Barang : ' + ${barang.merk_barang}"></p>-->
+                <!--                <p th:text="'Stok Barang : ' + ${barang.stok}"></p>-->
+                <!--                <p th:text="'Garansi Toko: ' + ${barang.jumlah_garansi}"></p>-->
+                <!--                <p th:text="'Deskripsi : ' + ${barang.deskripsi_barang}"></p>-->
+                <!--                <p th:text="'Tipe Barang : ' + ${barang.tipe.nama}"></p>-->
+                <!--                <p th:text="'Harga :' + 'Rp' +${barang.harga_barang}"></p>-->
+                <!--                <br>-->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <br>
+        <h2 class="text-center">Daftar Barang</h2>
+        <br>
+        <br>
+        <table class="table">
+        <thead class="bg-warning">
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Merk</th>
+            <th>Tipe</th>
+            <th>Tanggal Garansi</th>
+            <th>Harga</th>
+            <th>Qty</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pembelianBarang, iterationStatus : ${listPembelianBarang}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${pembelianBarang.barang.nama_barang}"></td>
+            <td th:text="${pembelianBarang.barang.merk_barang}"></td>
+            <td th:text="${pembelianBarang.barang.tipe.nama}"></td>
+            <td th:text="${pembelianBarang.tanggalGaransi}"></td>
+            <td th:text="${pembelianBarang.barang.harga_barang}"></td>
+            <td th:text="${pembelianBarang.quantity}"></td>
+            <td th:text="${pembelianBarang.barang.harga_barang} * ${pembelianBarang.quantity}"></td>
+        </tr>
+        </tbody>
+        </table>
+        <a class="btn btn-light btn-outline-warning" href="/pembelian">Kembali</a>
+    </div>
+    </div>
+    </div>
+</div>
+</body>
+
+</html>

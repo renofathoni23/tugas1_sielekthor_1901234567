@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Form Cari Pembelian </title>
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 class="text-center"> Cari Pembelian</h2>
+                <br>
+                <form th:action="@{/cari/pembelian}" method="GET">
+
+                    Member : <br>
+                    <select name="idMember" class="form-control">
+                        <option th:each="member : ${listMember}" th:value="${member.idMember}" th:text="${member.nama_member}"></option>
+                    </select>
+                    <br><br>
+
+                    Pembayaran : <br>
+                    <label>
+                        <input required type="radio" name="isCicilan" value="1"/> Cicil
+                    </label>
+
+                    <br>
+
+                    <label>
+                        <input required type="radio" name="isCicilan" value="0"/> Tunai
+                    </label>
+                    <br><br>
+
+                    <button class="btn btn-warning" type="submit">Cari</button>
+                    <a class="btn btn-light btn-outline-warning" href="/">Kembali</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:unless="*{listPembelian.size()!=0}">
+
+    </div>
+
+    <div th:if="*{listPembelian.size() != 0}">
+        <div class="container-sm">
+            <br>
+            <table class="table">
+                <thead class="bg-warning">
+                <tr>
+                    <th>No</th>
+                    <th>No Invoice</th>
+                    <th>Total Harga</th>
+                    <th>Member</th>
+                    <th>Jumlah Barang</th>
+                    <th>Tanggal Pembelian</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pembelian, iterationStatus : ${listPembelian}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${pembelian.no_invoice}"></td>
+                    <td th:text="${pembelian.total}"></td>
+                    <td th:text="${pembelian.member.nama_member}"></td>
+                    <td th:text="${pembelian.listPembelianBarang.size()}"></td>
+                    <td th:text="${#dates.format(pembelian.tanggal_pembelian, 'dd MMMM yyyy')}"></td>
+                    <td class>
+                        <a class="btn btn-primary" th:href="@{/pembelian/} + ${pembelian.idPembelian}">Lihat</a>
+                        <a class="btn btn-danger" th:href="@{/pembelian/hapus/} + ${pembelian.idPembelian}">Hapus</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+</div>
+<br>
+</body>
+</html>

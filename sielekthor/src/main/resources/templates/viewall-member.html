@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Barang</title>
+    <meta charset="UTF-8">
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+    <br>
+    <h2 class="text-center">Daftar Member</h2>
+    <br>
+    <a th:href="@{/member/tambah}" class="btn btn-warning font-weight-bold">+ Tambah Member</a>
+    <br>
+    <br>
+    <table class="table">
+        <thead class="bg-warning">
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Tanggal Lahir</th>
+            <th>Tanggal Pendaftaran</th>
+            <th>Jenis Kelamin</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member, iterationStatus : ${listMember}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${member.nama_member}"></td>
+            <td th:text="${member.tanggal_lahir}"></td>
+            <td th:text="${member.tanggal_pendaftaran}"></td>
+            <td th:if="${member.jenisKelamin} == 0">Laki-laki</td>
+            <td th:if="${member.jenisKelamin} == 1">Perempuan</td>
+            <td class>
+                <a class="btn btn-primary" th:href="@{/member/ubah/} + ${member.idMember}">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+
+</html>
+

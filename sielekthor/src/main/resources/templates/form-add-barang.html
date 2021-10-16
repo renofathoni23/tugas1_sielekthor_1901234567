@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Form Add Barang </title>
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Form Tambah Barang</h2>
+                <br>
+                <form th:action="@{/barang/tambah}" th:object="${barang}" method="POST">
+                    Nama Barang : <br>
+                    <input required class="form-control" type="text" name="nama_barang"/>
+                    <br><br>
+
+                    Kode Barang : <br>
+                    <input required class="form-control" type="text" name="kode_barang"/>
+                    <br><br>
+
+                    Merk Barang : <br>
+                    <input required class="form-control" type="text" name="merk_barang"/>
+                    <br><br>
+
+                    Stok Barang : <br>
+                    <input required class="form-control" type="number" name="stok" />
+                    <br><br>
+
+                    Garansi Toko : <br>
+                    <input required class="form-control" type="number" name="jumlah_garansi" />
+                    <br><br>
+
+                    Deskripsi Barang : <br>
+                    <input required class="form-control" type="text" name="deskripsi_barang" />
+                    <br><br>
+
+                    Tipe Barang : <br>
+                    <select name="tipe" class="form-control">
+                        <option th:each="tipe : ${listTipe}" th:value="${tipe.idTipe}" th:text="${tipe.nama}"></option>
+                    </select>
+                    <br><br>
+
+                    Harga : <br>
+                    <input required class="form-control" type="number" name="harga_barang" />
+                    <br><br>
+
+                    <button class="btn btn-warning btn-outline-dark" type="submit">Submit</button>
+                    <a class="btn btn-warning btn-dark" href="/">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

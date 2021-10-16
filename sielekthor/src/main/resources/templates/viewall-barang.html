@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Barang</title>
+    <meta charset="UTF-8">
+    <object th:include="fragment/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragment/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragment/fragment :: navbar('')"></nav>
+<div class="container">
+    <br>
+    <h2 class="text-center">Daftar Barang</h2>
+    <br>
+    <a th:href="@{/barang/tambah}" class="btn btn-warning font-weight-bold">+ Tambah Barang</a>
+    <br>
+    <br>
+    <table class="table">
+        <thead class="bg-warning">
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Tipe</th>
+            <th>Stok</th>
+            <th class="text-center">Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="barang, iterationStatus : ${listBarang}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${barang.nama_barang}"></td>
+            <td th:text="${barang.harga_barang}"></td>
+            <td th:text="${barang.tipe.nama}"></td>
+            <td th:text="${barang.stok}"></td>
+            <td class>
+                <a class="btn btn-primary" th:href="@{/barang/} + ${barang.idBarang}">Lihat</a>
+                <a class="btn btn-warning" th:href="@{/barang/ubah/} + ${barang.idBarang}" >Ubah</a>
+                <a class="btn btn-danger" >Hapus</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-outline-warning bg-light" href="/">Home</a>
+</div>
+
+</body>
+
+</html>
+
